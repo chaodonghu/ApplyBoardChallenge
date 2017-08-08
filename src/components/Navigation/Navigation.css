@@ -9,7 +9,7 @@
 
 .root {
   float: right;
-  margin: 6px 0 0;
+  margin: 6 0 0;
 }
 
 .link {
@@ -29,3 +29,37 @@
   color: rgba(255, 255, 255, 1);
 }
 
+.container {
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.navbar-default {
+  border-color: rgba(34, 34, 34, 0.05);
+  background-color: #fff;
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
+  font-family: Roboto, sans-serif;
+  font-size: 25px;
+}

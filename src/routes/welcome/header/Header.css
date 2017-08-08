@@ -1,3 +1,5 @@
+/* csslint ignore:start */
+
 @import '../../../components/variables.css';
 
 .homepageheader {
@@ -35,3 +37,5 @@
 .homepageheader .headercontent .headercontentinner h3 {
   font-weight: 200;
 }
+
+/* csslint ignore:end */
