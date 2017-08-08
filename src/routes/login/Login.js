@@ -18,14 +18,21 @@ import history from '../../history';
 
 class Login extends React.Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
   };
   constructor(props) {
     super(props);
     this.state = {
       title: props.title,
-    };
+      currentName: '',
+      clicked: false,
+    }
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  setName = (e) => {
+    // e.target.value is the text from our input
+    this.setState({currentName: e.target.value});
   }
 
   onSubmit(e) {
@@ -36,11 +43,13 @@ class Login extends React.Component {
   }
 
   render() {
+    console.log('login state',this.state);
+    console.log('login props',this.props)
     return (
       <div className={s.root}>
         <div className={s.container}>
           <h1>
-            {this.state.title}
+            {this.state.title} {this.state.currentName}
           </h1>
           <p className={s.lead}>Log in with your Name</p>
           <form onSubmit={this.onSubmit}>
@@ -49,6 +58,8 @@ class Login extends React.Component {
                 Name
               </label>
               <input
+                onChange={this.setName}
+                value={this.state.currentName}
                 className={s.input}
                 id="name"
                 type="text"
@@ -60,20 +71,12 @@ class Login extends React.Component {
               <label className={s.label} htmlFor="password">
                 Password:
               </label>
-              <input
-                className={s.input}
-                id="password"
-                type="password"
-                name="password"
-              />
+              <input className={s.input} id="password" type="password" name="password"/>
             </div>
             <div className={s.formGroup}>
-              <button
-                className={s.button}
-                onClick={() => {
-                  this.setState({ clicked: true });
-                }}
-              >
+              <button className={s.button} onClick={() => {
+                this.setState({clicked: true});
+              }}>
                 Log in
               </button>
             </div>
