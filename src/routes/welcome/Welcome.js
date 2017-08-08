@@ -11,6 +11,7 @@
 
 import React from 'react';
 import Parallax from 'react-springy-parallax';
+import {connect} from 'react-redux';
 
 // Import Components
 import Header from './header/Header';
@@ -29,7 +30,10 @@ class Welcome extends React.Component {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-    };
+    }
+    // console.log('WELCOME props',this.props.state.username.user_name);
+    console.log('welcome props', this.props.username)
+    // console.log('WELCOME props',this.state);
     return (
       <Parallax ref="parallax" pages={2}>
         <Parallax.Layer
@@ -80,6 +84,8 @@ class Welcome extends React.Component {
   }
 }
 
-export default Welcome;
+const mapStateToProps = state => ({username: state.username.user_name});
+
+export default connect(mapStateToProps)(Welcome);
 
 /*eslint-enable */

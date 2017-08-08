@@ -23,9 +23,7 @@ class Header extends React.Component {
                 Apply to the top universities in Canada and the USA through an
                 all-in-one platform with a 95% acceptance rate.
               </h3>
-              <button type="button" className="btn btn-success">
-                Apply now!
-              </button>
+              <button type="button" className="btn btn-success">Apply now {this.props.username}!</button>
             </div>
           </div>
         </div>
