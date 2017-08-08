@@ -71,7 +71,11 @@ onSubmit(e) {
                 id="name"
                 type="text"
                 name="name"
+                placeholder="Username"
                 autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck="off"
               />
             </div>
             <div className={s.formGroup}>
@@ -83,6 +87,10 @@ onSubmit(e) {
                 id="password"
                 type="password"
                 name="password"
+                placeholder="Password"
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck="off"
               />
             </div>
             <div className={s.formGroup}>
