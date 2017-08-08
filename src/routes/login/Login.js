@@ -18,6 +18,10 @@ import {connect} from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import { selectUser } from '../../actions/name';
 import history from '../../history';
+import Autocomplete from 'react-autocomplete'
+
+// Import utils
+import { getNames, matchNameToTerm, sortName, styles, inputProps } from './lib/utils'
 
 class Login extends React.Component {
   static propTypes = {
@@ -76,6 +80,23 @@ onSubmit(e) {
                 autoComplete="off"
                 autoCorrect="off"
                 spellCheck="off"
+              />
+              <Autocomplete
+                inputProps={inputProps.placeholder}
+                menuStyle={styles.menu}
+                value={this.state.currentName}
+                items={getNames()}
+                getItemValue={(item) => item.name}
+                shouldItemRender={matchNameToTerm}
+                sortItems={sortName}
+                onChange={this.setName}
+                onSelect={currentName => this.setState({ currentName})}
+                renderItem={(item, isHighlighted) => (
+                  <div
+                    style={isHighlighted ? styles.highlightedItem : styles.item}
+                    key={item.abbr}
+                  >{item.name}</div>
+                )}
               />
             </div>
             <div className={s.formGroup}>
