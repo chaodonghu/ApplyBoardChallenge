@@ -14,11 +14,14 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Login.css';
 
+import {connect} from 'react-redux';
+// import { bindActionCreators } from 'redux';
+import { selectUser } from '../../actions/name';
 import history from '../../history';
 
 class Login extends React.Component {
   static propTypes = {
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
   };
   constructor(props) {
     super(props);
@@ -32,19 +35,23 @@ class Login extends React.Component {
 
   setName = (e) => {
     // e.target.value is the text from our input
-    this.setState({currentName: e.target.value});
-  }
+    this.setState({ currentName: e.target.value });
+}
 
-  onSubmit(e) {
-    e.preventDefault();
-    // this.props.selectUser(this.state.currentName).then(
-    history.push('/welcome');
-    // );
-  }
+onSubmit(e) {
+  e.preventDefault();
+  // this.props.selectUser(this.state.currentName).then(
+    history.push('/welcome')
+  // );
+}
 
   render() {
     console.log('login state',this.state);
     console.log('login props',this.props)
+    let buttonClass = s.gofetchbtn;
+    if (this.state.clicked) {
+      buttonClass += s.onclic;
+    }
     return (
       <div className={s.root}>
         <div className={s.container}>
@@ -71,13 +78,21 @@ class Login extends React.Component {
               <label className={s.label} htmlFor="password">
                 Password:
               </label>
-              <input className={s.input} id="password" type="password" name="password"/>
+              <input
+                className={s.input}
+                id="password"
+                type="password"
+                name="password"
+              />
             </div>
             <div className={s.formGroup}>
-              <button className={s.button} onClick={() => {
-                this.setState({clicked: true});
-              }}>
-                Log in
+              <button
+                className={s.button}
+                onClick={() => {
+                  this.setState({clicked: true});
+                  this.props.selectUser(this.state.currentName);
+                }}
+                >Log in
               </button>
             </div>
           </form>
@@ -87,6 +102,19 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(s)(Login);
+const mapStateToProps = state => ({
+    username: state.username.user_name
+});
+
+// Dispatch = call a function
+const mapDispatchToProps = dispatch => {
+  return {
+    selectUser: (user) => dispatch(selectUser(user)),
+  };
+}
+
+export default connect(
+      mapStateToProps, mapDispatchToProps
+  )(withStyles(s)(Login));
 
 /*eslint-enable */
