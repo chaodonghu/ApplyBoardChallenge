@@ -7,10 +7,14 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/*eslint-disable */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Login.css';
+
+import history from '../../history';
 
 class Login extends React.Component {
   static propTypes = {
@@ -21,6 +25,14 @@ class Login extends React.Component {
     this.state = {
       title: props.title,
     };
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    // this.props.selectUser(this.state.currentName).then(
+    history.push('/welcome');
+    // );
   }
 
   render() {
@@ -31,7 +43,7 @@ class Login extends React.Component {
             {this.state.title}
           </h1>
           <p className={s.lead}>Log in with your Name</p>
-          <form onSubmit={e => e.preventDefault()}>
+          <form onSubmit={this.onSubmit}>
             <div className={s.formGroup}>
               <label className={s.label} htmlFor="name">
                 Name
@@ -56,7 +68,14 @@ class Login extends React.Component {
               />
             </div>
             <div className={s.formGroup}>
-              <button className={s.button}>Log in</button>
+              <button
+                className={s.button}
+                onClick={() => {
+                  this.setState({ clicked: true });
+                }}
+              >
+                Log in
+              </button>
             </div>
           </form>
         </div>
@@ -66,3 +85,5 @@ class Login extends React.Component {
 }
 
 export default withStyles(s)(Login);
+
+/*eslint-enable */
